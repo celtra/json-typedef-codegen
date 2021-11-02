@@ -23,6 +23,7 @@ jobs:
         env:
           TARGET: ${{ matrix.target }}
           ARTIFACT: ${{ matrix.artifact }}
+      - run: ls -alsh
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v2
         env:
@@ -30,4 +31,4 @@ jobs:
           ARTIFACT: ${{ matrix.artifact }}
         with:
           name: zip
-          path: $TARGET.zip
+          path: aarch64-unknown-linux-gnu.zip
