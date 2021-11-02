@@ -1,7 +1,4 @@
-on:
-  release:
-    types: [published]
-
+on: push
 jobs:
   release_binary:
     runs-on: ${{ matrix.runs_on }}
@@ -9,22 +6,14 @@ jobs:
       matrix:
         target:
           - x86_64-unknown-linux-gnu
-          - x86_64-unknown-linux-musl
-          - x86_64-apple-darwin
-          - x86_64-pc-windows-gnu
+          - aarch64-unknown-linux-gnu
         include:
           - target: x86_64-unknown-linux-gnu
             runs_on: ubuntu-latest
             artifact: jtd-codegen
-          - target: x86_64-unknown-linux-musl
+          - target: aarch64-unknown-linux-gnu
             runs_on: ubuntu-latest
             artifact: jtd-codegen
-          - target: x86_64-apple-darwin
-            runs_on: macos-latest
-            artifact: jtd-codegen
-          - target: x86_64-pc-windows-gnu
-            runs_on: ubuntu-latest
-            artifact: jtd-codegen.exe
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
