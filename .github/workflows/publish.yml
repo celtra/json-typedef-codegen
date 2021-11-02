@@ -25,6 +25,9 @@ jobs:
           ARTIFACT: ${{ matrix.artifact }}
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v2
+        env:
+          TARGET: ${{ matrix.target }}
+          ARTIFACT: ${{ matrix.artifact }}
         with:
           name: zip
           path: $TARGET.zip
