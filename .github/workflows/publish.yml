@@ -5,12 +5,8 @@ jobs:
     strategy:
       matrix:
         target:
-          - x86_64-unknown-linux-gnu
           - aarch64-unknown-linux-gnu
         include:
-          - target: x86_64-unknown-linux-gnu
-            runs_on: ubuntu-latest
-            artifact: jtd-codegen
           - target: aarch64-unknown-linux-gnu
             runs_on: ubuntu-latest
             artifact: jtd-codegen
@@ -27,11 +23,8 @@ jobs:
         env:
           TARGET: ${{ matrix.target }}
           ARTIFACT: ${{ matrix.artifact }}
-      - uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v2
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{ matrix.target }}.zip
-          asset_name: ${{ matrix.target }}.zip
-          asset_content_type: application/zip
+          name: zip
+          path: $TARGET.zip
